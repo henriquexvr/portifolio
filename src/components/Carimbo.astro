@@ -8,31 +8,36 @@
     <div class="celula"><small>DATA</small><br>10/2026</div>
   </div>
   <nav class="nav-botoes" aria-label="Navegação entre páginas">
-    <button data-hash="#capa" aria-current="page">01</button>
-    <button data-hash="#cuphub">02</button>
-    <button data-hash="#automacao">03</button>
-    <button onclick="window.scrollBy(0, -window.innerHeight)" aria-label="Anterior">↑</button>
-    <button onclick="window.scrollBy(0, window.innerHeight)" aria-label="Próxima">↓</button>
+    <button class="btn" data-hash="#capa" aria-current="true" title="Ir para 01 · Capa" aria-label="Ir para 01 · Capa">01</button>
+    <button class="btn" data-hash="#cuphub" title="Ir para 02 · CupHub" aria-label="Ir para 02 · CupHub">02</button>
+    <button class="btn" data-hash="#automacao" title="Ir para 03 · Automação" aria-label="Ir para 03 · Automação">03</button>
+    <button class="btn" id="btn-anterior" title="Página anterior" aria-label="Página anterior">↑</button>
+    <button class="btn" id="btn-proximo" title="Próxima página" aria-label="Próxima página">↓</button>
   </nav>
 </div>
 
 <script>
-  const updateActive = (hash) => {
+  const updateActive = (hash, idx) => {
     document.querySelectorAll('.nav-botoes button[data-hash]').forEach(btn => {
-      btn.setAttribute('aria-current', btn.dataset.hash === hash ? 'page' : 'false');
+      btn.setAttribute('aria-current', btn.dataset.hash === hash ? 'true' : 'false');
     });
+    // disable anterior/proximo
+    const ant = document.getElementById('btn-anterior');
+    const prox = document.getElementById('btn-proximo');
+    if (ant) ant.disabled = idx === 0;
+    if (prox) prox.disabled = idx === 2;
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const pag = entry.target;
-        document.getElementById('pag-num').textContent = 
-          pag.id === 'capa' ? '01' : pag.id === 'cuphub' ? '02' : '03';
+        const idx = pag.id === 'capa' ? 0 : pag.id === 'cuphub' ? 1 : 2;
+        document.getElementById('pag-num').textContent = String(idx + 1).padStart(2, '0');
         document.getElementById('pag-secao').textContent = pag.dataset.titulo;
         const hash = '#' + pag.id;
         history.replaceState(null, null, hash);
-        updateActive(hash);
+        updateActive(hash, idx);
       }
     });
   }, { threshold: 0.6 });
@@ -43,6 +48,8 @@
       document.querySelector(btn.dataset.hash).scrollIntoView({ behavior: 'smooth' });
     });
   });
+  document.getElementById('btn-anterior').addEventListener('click', () => window.scrollBy(0, -window.innerHeight));
+  document.getElementById('btn-proximo').addEventListener('click', () => window.scrollBy(0, window.innerHeight));
 </script>
 
 <style>
@@ -65,10 +72,11 @@
   .celula { border-bottom: 0.5px solid var(--ink); padding-bottom: 4px; }
   .celula small { font-size: 10px; color: var(--muted); text-transform: uppercase; }
   .nav-botoes { display: flex; gap: 4px; margin-top: 8px; }
-  button { padding: 4px 8px; border: 1px solid var(--ink); background: var(--paper); cursor: pointer; min-width: 30px; min-height: 30px; }
-  button[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  .btn { min-width: 30px; min-height: 30px; padding: 4px 8px; }
   @media (max-width: 900px) {
     .carimbo { bottom: 0; right: 0; width: 100%; border-left: none; border-right: none; border-bottom: none; }
     .grid-carimbo { display: none; }
+    .nav-botoes { width: 100%; justify-content: space-between; }
+    .btn { min-width: 44px; min-height: 44px; }
   }
 </style>

@@ -1,0 +1,75 @@
+---
+const { titulo, id, dataBloco = "" } = Astro.props;
+---
+<section class="pagina" id={id} data-titulo={titulo}>
+  <div class="moldura-externa">
+    <div class="moldura-interna" data-bloco={dataBloco}>
+      <div class="zonas-topo">
+        {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
+      </div>
+      <div class="zonas-esq">
+        {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
+      </div>
+      
+      <div class="conteudo-slot">
+        <slot />
+      </div>
+
+      <div class="zonas-dir">
+        {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
+      </div>
+      <div class="zonas-base">
+        {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pagina { 
+    height: 100dvh; 
+    scroll-snap-align: start; 
+    padding: 16px; 
+    position: relative; 
+    box-sizing: border-box;
+  }
+  .moldura-externa { 
+    width: 100%; height: 100%; 
+    border: 2px solid var(--ink); 
+    padding: 16px; 
+    position: relative; 
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    grid-template-rows: 24px 1fr 24px;
+  }
+  .moldura-interna { 
+    grid-column: 2; grid-row: 2;
+    border: 0.5px solid var(--ink); 
+    position: relative;
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    grid-template-rows: 24px 1fr 24px;
+  }
+  .conteudo-slot {
+    grid-column: 2; grid-row: 2;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    overflow: hidden;
+  }
+  /* Malha */
+  .moldura-interna::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid-maior) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-maior) 1px, transparent 1px);
+    background-size: calc(100% / 24) calc(100% / 12), calc(100% / 24) calc(100% / 12), calc(100% / 6) calc(100% / 4), calc(100% / 6) calc(100% / 4);
+    z-index: 0; pointer-events: none;
+  }
+  .zonas-topo, .zonas-base { display: flex; grid-column: 2; justify-content: space-around; align-items: center; }
+  .zonas-esq, .zonas-dir { display: flex; flex-direction: column; grid-row: 2; justify-content: space-around; align-items: center; }
+  .zona-letra, .zona-num { font-size: 11px; color: var(--muted); }
+  @media (max-width: 900px) { .pagina { padding: 8px; } }
+</style>

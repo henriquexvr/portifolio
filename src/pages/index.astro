@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import BotaoTema from '../components/BotaoTema.astro';
 import Carimbo from '../components/Carimbo.astro';
+import Folha from '../components/Folha.astro';
 import { curriculo } from '../data/curriculo.ts';
 import { projetos } from '../data/projetos.ts';
 import PaginaProjeto from '../components/PaginaProjeto.astro';
@@ -28,82 +29,78 @@ import BotDiag from '../components/diagramas/Bot.astro';
     <Carimbo />
     
     <main>
-      <section class="pagina" id="capa" aria-labelledby="h-capa" data-titulo="CAPA">
+      <Folha id="capa" titulo="CAPA" dataBloco="moldura-interna">
         <h1 id="h-capa" class="sr-only">CAPA</h1>
-        <div class="moldura-externa">
-          <div class="moldura-interna" data-bloco="moldura-interna">
-            <div class="grid-capa">
-              <aside class="col-esq">
-                <h1>{curriculo.nome.split(' ').map(n => <div>{n}</div>)}</h1>
-                <div class="cota-container">
-                  <svg viewBox="0 0 400 30" width="100%" height="30" stroke="currentColor" fill="none">
-                    <line x1="10" y1="15" x2="390" y2="15" stroke-width="1" />
-                    <line x1="10" y1="10" x2="10" y2="20" />
-                    <line x1="390" y1="10" x2="390" y2="20" />
-                    <text x="200" y="12" text-anchor="middle" font-size="13" font-family="monospace" fill="currentColor">{curriculo.cota}</text>
-                  </svg>
-                </div>
-                <p class="tag">{curriculo.tag}</p>
-                
-                <div class="bloco-item">
-                  <h2>00 RESUMO</h2>
-                  <p>{curriculo.resumo}</p>
-                </div>
-                <div class="bloco-item">
-                  <h2>CONTATO</h2>
-                  <ul class="lista-contato">
-                    <li><a href={`mailto:${curriculo.contato.email}`}>{curriculo.contato.email} ↗</a></li>
-                    <li><a href={`https://${curriculo.contato.github}`}>{curriculo.contato.github} ↗</a></li>
-                    <li><a href={`https://${curriculo.contato.linkedin}`}>{curriculo.contato.linkedin} ↗</a></li>
-                    <li>{curriculo.contato.local}</li>
-                  </ul>
-                </div>
-              </aside>
-              
-              <main class="col-dir">
-                <div class="bloco-item">
-                  <h2>01 HABILIDADES</h2>
-                  <dl>
-                    {curriculo.habilidades.map(h => (
-                      <div class="linha-hab">
-                        <dt>{h.label}</dt>
-                        <dd>{h.itens}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-
-                <div class="bloco-item">
-                  <h2>02 PROJETOS</h2>
-                  {curriculo.projetos.map(p => (
-                    <a href={`#${p.id}`} class="projeto-link" onclick="document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'})">
-                      <span>{p.num}</span>
-                      <strong>{p.nome}</strong>
-                      <span>{p.ano}</span>
-                      <span>{p.stack}</span>
-                      <span>→</span>
-                    </a>
-                  ))}
-                </div>
-
-                <div class="bloco-item">
-                  <h2>03 FORMAÇÃO</h2>
-                  {curriculo.formacao.map(f => (
-                    <div><strong>{f.curso}</strong><br/><span style="color:var(--muted)">{f.periodo}</span></div>
-                  ))}
-                </div>
-
-                <div class="bloco-item">
-                  <h2>04 EXPERIÊNCIA</h2>
-                  {curriculo.experiencia.map(e => (
-                    <div><strong>{e.empresa} · {e.cargo}</strong><br/><span style="color:var(--muted)">{e.periodo}</span><br/>{e.descricao}</div>
-                  ))}
-                </div>
-              </main>
+        <div class="grid-capa">
+          <aside class="col-esq">
+            <h1>{curriculo.nome.split(' ').map(n => <div>{n}</div>)}</h1>
+            <div class="cota-container">
+              <svg viewBox="0 0 400 30" width="100%" height="30" stroke="currentColor" fill="none">
+                <line x1="10" y1="15" x2="390" y2="15" stroke-width="1" />
+                <line x1="10" y1="10" x2="10" y2="20" />
+                <line x1="390" y1="10" x2="390" y2="20" />
+                <text x="200" y="12" text-anchor="middle">{curriculo.cota}</text>
+              </svg>
             </div>
-          </div>
+            <p class="tag"><span class="quadrado"></span> {curriculo.tag}</p>
+            
+            <div class="bloco-item">
+              <h2>00 RESUMO</h2>
+              <p>{curriculo.resumo}</p>
+            </div>
+            <div class="bloco-item">
+              <h2>CONTATO</h2>
+              <ul class="lista-contato">
+                <li><a href={`mailto:${curriculo.contato.email}`} class="btn-link">{curriculo.contato.email} ↗</a></li>
+                <li><a href={`https://${curriculo.contato.github}`} class="btn-link">{curriculo.contato.github} ↗</a></li>
+                <li><a href={`https://${curriculo.contato.linkedin}`} class="btn-link">{curriculo.contato.linkedin} ↗</a></li>
+                <li>{curriculo.contato.local}</li>
+              </ul>
+            </div>
+          </aside>
+          
+          <main class="col-dir">
+            <div class="bloco-item">
+              <h2>01 HABILIDADES</h2>
+              <dl>
+                {curriculo.habilidades.map(h => (
+                  <div class="linha-hab">
+                    <dt>{h.label}</dt>
+                    <dd>{h.itens}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div class="bloco-item">
+              <h2>02 PROJETOS</h2>
+              {curriculo.projetos.map(p => (
+                <a href={`#${p.id}`} class="projeto-link" onclick="document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'})">
+                  <span>{p.num}</span>
+                  <strong>{p.nome}</strong>
+                  <span>{p.ano}</span>
+                  <span>{p.stack}</span>
+                  <span>→</span>
+                </a>
+              ))}
+            </div>
+
+            <div class="bloco-item">
+              <h2>03 FORMAÇÃO</h2>
+              {curriculo.formacao.map(f => (
+                <div><strong>{f.curso}</strong><br/><span style="color:var(--muted)">{f.periodo}</span></div>
+              ))}
+            </div>
+
+            <div class="bloco-item">
+              <h2>04 EXPERIÊNCIA</h2>
+              {curriculo.experiencia.map(e => (
+                <div><strong>{e.empresa} · {e.cargo}</strong><br/><span style="color:var(--muted)">{e.periodo}</span><br/>{e.descricao}</div>
+              ))}
+            </div>
+          </main>
         </div>
-      </section>
+      </Folha>
 
       <PaginaProjeto projeto={projetos[0]} proximo={projetos[1]} idx={0}>
         <CupHubDiag slot="diagrama" />
@@ -115,41 +112,28 @@ import BotDiag from '../components/diagramas/Bot.astro';
 
     <style>
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-      .pagina { min-height: 100dvh; scroll-snap-align: start; padding: 16px; position: relative; }
-      @media (min-width: 900px) { .pagina { height: 100dvh; scroll-snap-type: y mandatory; overflow: hidden; padding: 0; } }
-      .moldura-externa { width: 100%; height: 100%; border: 2px solid var(--ink); padding: 16px; position: relative; }
-      .moldura-interna { width: 100%; height: 100%; border: 0.5px solid var(--ink); padding: 24px; display: grid; position: relative; }
-      
-      /* Malha */
-      .moldura-externa::before {
-        content: ""; position: absolute; top: 16px; left: 16px; right: 16px; bottom: 16px;
-        background-image: 
-          linear-gradient(var(--grid) 1px, transparent 1px),
-          linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-          linear-gradient(var(--grid-mestra) 1px, transparent 1px),
-          linear-gradient(90deg, var(--grid-mestra) 1px, transparent 1px);
-        background-size: 25% 25%, 25% 25%, 100% 100%, 100% 100%;
-        z-index: 0; pointer-events: none;
-      }
-      .moldura-interna { z-index: 1; }
-
-      .grid-capa { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; width: 100%; }
+      .grid-capa { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; width: 100%; height: 100%; align-content: space-between; }
       .col-esq { grid-column: 1 / 6; display: flex; flex-direction: column; gap: 16px; }
       .col-dir { grid-column: 6 / 13; display: flex; flex-direction: column; gap: 24px; }
-      h1 { font-family: 'Zilla Slab', serif; font-size: clamp(2.8rem, 6vh, 5.5rem); line-height: 1; color: var(--ink); }
+      h1 { font-family: 'Zilla Slab', serif; font-size: clamp(3.2rem, 4.6vw, 6.5rem); line-height: 1; color: var(--ink); }
       h2 { font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--ink); padding-bottom: 4px; margin-bottom: 8px; }
       .cota-container { margin: 16px 0; }
-      .tag { color: var(--accent); }
+      .tag { color: var(--accent); display: flex; align-items: center; gap: 8px; }
+      .quadrado { width: 8px; height: 8px; background: var(--accent); display: inline-block; }
       .lista-contato { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-      .lista-contato a { text-decoration: none; border-bottom: 1px solid var(--ink); }
+      .btn-link { text-decoration: none; border-bottom: 1px solid var(--ink); display: inline-block; padding: 0 4px; transition: all 120ms; }
+      @media (hover:hover) {
+        .btn-link:hover { background: var(--ink); color: var(--paper); }
+      }
       .linha-hab { display: grid; grid-template-columns: 120px 1fr; gap: 8px; margin-bottom: 4px; }
-      .projeto-link { display: grid; grid-template-columns: 30px 1fr 50px 1fr 30px; align-items: center; text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--ink); }
-      .projeto-link:hover { color: var(--accent); }
+      .projeto-link { display: grid; grid-template-columns: 30px 1fr 50px 1fr 30px; align-items: center; text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--ink); transition: all 120ms; }
+      @media (hover:hover) {
+        .projeto-link:hover { background: var(--ink); color: var(--paper); padding-left: 8px; }
+        .projeto-link:hover span:last-child { transform: translateX(4px); }
+      }
       .bloco-item { display: flex; flex-direction: column; gap: 8px; }
       @media (max-width: 900px) {
         .col-esq, .col-dir { grid-column: 1 / 13; }
-        .moldura-externa { border-width: 1px; }
-        .moldura-interna { padding: 8px; }
       }
     </style>
   </body>

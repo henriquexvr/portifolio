@@ -1,10 +1,10 @@
 ---
 ---
-<button id="btn-tema" aria-pressed="false" aria-label="Alternar tema entre papel e blueprint" data-bloco="tema">
-  <div class="label-papel">PAPEL</div>
-  <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>
-  <div class="label-blueprint">BLUEPRINT</div>
-</button>
+<div id="btn-tema" class="btn" role="switch" aria-checked="false" aria-label="Alternar tema entre papel e blueprint" title="Alternar para blueprint" data-bloco="tema">
+  <span class="label-papel">PAPEL</span>
+  <span class="separador">/</span>
+  <span class="label-blueprint">BLUEPRINT</span>
+</div>
 
 <style>
   #btn-tema {
@@ -14,28 +14,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px;
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    box-shadow: 3px 3px 0 var(--ink);
-    cursor: pointer;
+    padding: 6px 10px;
     z-index: 1000;
   }
-  .label-papel, .label-blueprint {
-    font-size: 11px;
-    padding: 2px 4px;
-  }
-  #btn-tema[aria-pressed="false"] .label-papel {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  #btn-tema[aria-pressed="true"] .label-blueprint {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  #btn-tema[aria-checked="false"] .label-papel { background: var(--ink); color: var(--paper); }
+  #btn-tema[aria-checked="false"] .label-blueprint { background: transparent; color: var(--ink); }
+  #btn-tema[aria-checked="true"] .label-papel { background: transparent; color: var(--ink); }
+  #btn-tema[aria-checked="true"] .label-blueprint { background: var(--ink); color: var(--paper); }
+  .separador { color: var(--muted); font-size: 11px; }
   @media (max-width: 900px) {
     #btn-tema { top: 12px; right: 12px; min-width: 44px; min-height: 44px; justify-content: center; }
-    .label-papel, .label-blueprint { display: none; }
+    .label-papel, .label-blueprint, .separador { display: none; }
+    #btn-tema::before { content: "☀"; }
+    #btn-tema[aria-checked="true"]::before { content: "☾"; }
   }
 </style>
 
@@ -43,7 +34,9 @@
   const btn = document.getElementById('btn-tema');
   const update = () => {
     const isDark = document.documentElement.getAttribute('data-tema') === 'escuro';
-    btn.setAttribute('aria-pressed', isDark);
+    btn.setAttribute('aria-checked', isDark);
+    btn.title = isDark ? 'Alternar para papel' : 'Alternar para blueprint';
+    btn.setAttribute('aria-label', isDark ? 'Alternar para papel' : 'Alternar para blueprint');
   };
   btn.addEventListener('click', () => {
     const next = document.documentElement.getAttribute('data-tema') === 'claro' ? 'escuro' : 'claro';

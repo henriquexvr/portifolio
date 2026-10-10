@@ -1,10 +1,15 @@
+@import "@fontsource/zilla-slab/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+
 :root[data-tema="claro"] {
   --paper: #F4EFE6;
   --ink: #2c3e50;
   --accent: #c0392b;
   --muted: #55616d;
   --grid: rgba(44,62,80,.10);
-  --grid-mestra: rgba(44,62,80,.16);
+  --grid-maior: rgba(44,62,80,.20);
   color-scheme: light;
 }
 
@@ -14,39 +19,25 @@
   --accent: #ff7a6b;
   --muted: #9db2c2;
   --grid: rgba(214,230,242,.09);
-  --grid-mestra: rgba(214,230,242,.15);
+  --grid-maior: rgba(214,230,242,.18);
   color-scheme: dark;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { margin: 0; height: 100%; }
+html { scroll-snap-type: y mandatory; background-color: var(--paper); color: var(--ink); transition: background-color 200ms, color 200ms; --recuo-moldura: 40px; }
+body { font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 0.45vw + 6px, 15px); line-height: 1.5; }
 
-html {
-  scroll-snap-type: y mandatory;
-  background-color: var(--paper);
-  color: var(--ink);
-  transition: background-color 200ms, color 200ms;
-  --recuo-moldura: 40px;
+.btn {
+  padding: 8px 12px; border: 1px solid var(--ink); background: var(--paper); cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink); display: inline-flex; align-items: center; justify-content: center;
+  transition: all 120ms; font-family: 'IBM Plex Mono', monospace;
 }
-
-body {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  line-height: 1.5;
-  transition: background-color 200ms, color 200ms;
+@media (hover:hover) {
+  .btn:hover { background: var(--ink); color: var(--paper); transform: translate(2px, 2px); box-shadow: none; }
 }
+.btn:active { transform: translate(2px, 2px); box-shadow: none; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn[aria-current="true"], .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
-button, a, input {
-  font: inherit;
-  color: inherit;
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+svg text { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px; fill: currentColor; }
