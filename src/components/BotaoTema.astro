@@ -1,6 +1,6 @@
 ---
 ---
-<button id="btn-tema" aria-pressed="false" aria-label="Alternar tema entre papel e blueprint">
+<button id="btn-tema" aria-pressed="false" aria-label="Alternar tema entre papel e blueprint" data-bloco="tema">
   <div class="label-papel">PAPEL</div>
   <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>
   <div class="label-blueprint">BLUEPRINT</div>
@@ -9,8 +9,8 @@
 <style>
   #btn-tema {
     position: fixed;
-    top: 40px;
-    right: 40px;
+    top: calc(var(--recuo-moldura) + 12px);
+    right: calc(var(--recuo-moldura) + 12px);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -19,7 +19,7 @@
     border: 1px solid var(--ink);
     box-shadow: 3px 3px 0 var(--ink);
     cursor: pointer;
-    z-index: 100;
+    z-index: 1000;
   }
   .label-papel, .label-blueprint {
     font-size: 11px;
@@ -32,6 +32,10 @@
   #btn-tema[aria-pressed="true"] .label-blueprint {
     background: var(--ink);
     color: var(--paper);
+  }
+  @media (max-width: 900px) {
+    #btn-tema { top: 12px; right: 12px; min-width: 44px; min-height: 44px; justify-content: center; }
+    .label-papel, .label-blueprint { display: none; }
   }
 </style>
 
