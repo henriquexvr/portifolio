@@ -1,0 +1,51 @@
+---
+---
+<button id="btn-tema" aria-pressed="false" aria-label="Alternar tema entre papel e blueprint">
+  <div class="label-papel">PAPEL</div>
+  <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>
+  <div class="label-blueprint">BLUEPRINT</div>
+</button>
+
+<style>
+  #btn-tema {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer;
+    z-index: 100;
+  }
+  .label-papel, .label-blueprint {
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+  #btn-tema[aria-pressed="false"] .label-papel {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  #btn-tema[aria-pressed="true"] .label-blueprint {
+    background: var(--ink);
+    color: var(--paper);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('btn-tema');
+  const update = () => {
+    const isDark = document.documentElement.getAttribute('data-tema') === 'escuro';
+    btn.setAttribute('aria-pressed', isDark);
+  };
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-tema') === 'claro' ? 'escuro' : 'claro';
+    document.documentElement.setAttribute('data-tema', next);
+    localStorage.setItem('tema', next);
+    update();
+  });
+  update();
+</script>

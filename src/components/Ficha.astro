@@ -1,0 +1,159 @@
+---
+import { projetos, Projeto } from '../data/projetos';
+---
+<div class="ficha-container" aria-live="polite" aria-label="Detalhes do projeto">
+  <div class="ficha-vazia" id="ficha-vazia" role="status">
+    <span>SELECIONE UM CÔMODO</span>
+  </div>
+
+  {Object.values(projetos).map((p: Projeto) => (
+    <div class="ficha-conteudo" id={`ficha-${p.id}`} data-ficha-id={p.id} role="region" aria-labelledby={`ficha-header-${p.id}`} hidden>
+      <div class="ficha-header" id={`ficha-header-${p.id}`}>
+        {p.codigo} &middot; {p.nome}
+      </div>
+      <div class="ficha-linhas">
+        {p.status && (
+          <div class="ficha-linha">
+            <span class="ficha-rotulo">STATUS</span>
+            <span class="ficha-valor">{p.status}</span>
+          </div>
+        )}
+        <div class="ficha-linha">
+          <span class="ficha-rotulo">DESCRIÇÃO</span>
+          <span class="ficha-valor">{p.descricao}</span>
+        </div>
+        {p.stack && p.stack.length > 0 && (
+          <div class="ficha-linha">
+            <span class="ficha-rotulo">STACK</span>
+            <div class="ficha-valor stack-tags">
+              {p.stack.map(s => (
+                <span class="tag">{s}</span>
+              ))}
+            </div>
+          </div>
+        )}
+        {p.papel && (
+          <div class="ficha-linha">
+            <span class="ficha-rotulo">PAPEL</span>
+            <span class="ficha-valor">{p.papel}</span>
+          </div>
+        )}
+        {p.repo && (
+          <div class="ficha-linha">
+            <span class="ficha-rotulo">REPOSITÓRIO</span>
+            <span class="ficha-valor">
+              <a href={p.repo} target="_blank" rel="noopener noreferrer" class="repo-link" aria-label={`Acessar repositório do ${p.nome}`}>Acessar repositório ↗</a>
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .ficha-container {
+    width: 100%;
+    background-color: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 16px;
+    font-family: var(--mono);
+  }
+
+  .ficha-vazia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    border: 1px dashed var(--muted);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    font-family: var(--mono);
+  }
+
+  .ficha-conteudo {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .ficha-conteudo.ativo {
+    display: block;
+    opacity: 1;
+  }
+
+  .ficha-header {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--ink);
+  }
+
+  .ficha-linhas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ficha-linha {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--grid);
+  }
+
+  .ficha-linha:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .ficha-rotulo {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .ficha-valor {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .tag {
+    border: 0.5px solid var(--ink);
+    padding: 2px 6px;
+    font-size: 10px;
+    color: var(--ink);
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--mono);
+  }
+
+  .repo-link {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    font-family: var(--mono);
+  }
+
+  .repo-link:hover,
+  .repo-link:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

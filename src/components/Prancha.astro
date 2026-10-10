@@ -1,0 +1,660 @@
+---
+import Carimbo from './Carimbo.astro';
+import Planta from './Planta.astro';
+import Ficha from './Ficha.astro';
+---
+<div class="custom-cursor" id="cursor">
+  <svg width="24" height="24" viewBox="0 0 24 24"><line x1="12" y1="0" x2="12" y2="8" stroke="var(--ink)"/><line x1="12" y1="16" x2="12" y2="24" stroke="var(--ink)"/><line x1="0" y1="12" x2="8" y2="12" stroke="var(--ink)"/><line x1="16" y1="12" x2="24" y2="12" stroke="var(--ink)"/></svg>
+</div>
+<div class="pranchas-container">
+  <!-- FOLHA 01 -->
+  <section class="prancha" aria-label="Folha 01: Planta Baixa e Projetos">
+    <div class="moldura-externa">
+      <div class="zona-faixa topo">
+        <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span>
+      </div>
+      <div class="zona-faixa esquerda">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+      </div>
+      <div class="moldura-interna">
+        <div class="grid-folha-01" data-bloco="folha-01">
+          <!-- Hero -->
+          <div class="bloco-hero" data-bloco="hero">
+            <h1 class="titulo-hero">
+              HENRIQUE<br>XAVIER
+            </h1>
+            <div class="linha-cota">
+              <div class="chamada-vert"></div>
+              <div class="eixo-cota">
+                <svg class="seta-esquerda" width="8" height="8" viewBox="0 0 8 8"><path d="M8 0L0 4L8 8V0Z" fill="var(--ink)"/></svg>
+                <span class="texto-cota">ENGENHARIA DE SOFTWARE &middot; BACK-END JAVA</span>
+                <svg class="seta-direita" width="8" height="8" viewBox="0 0 8 8"><path d="M0 0L8 4L0 8V0Z" fill="var(--ink)"/></svg>
+              </div>
+              <div class="chamada-vert"></div>
+            </div>
+          </div>
+
+          <!-- Planta -->
+          <div class="bloco-planta" data-bloco="planta">
+            <Planta />
+          </div>
+
+          <!-- Título da Planta -->
+          <div class="bloco-titulo-planta" data-bloco="titulo-planta">
+            <div class="circulo-titulo">
+              <span class="num-titulo">01</span>
+            </div>
+            <span class="nome-planta">PLANTA BAIXA &middot; PAVIMENTO ÚNICO</span>
+          </div>
+
+          <!-- Norte e Escala -->
+          <div class="bloco-norte-escala" data-bloco="norte-escala">
+            <div class="norte">
+              <svg width="24" height="48" viewBox="0 0 24 48">
+                <line x1="12" y1="48" x2="12" y2="4" stroke="var(--ink)" stroke-width="1"/>
+                <polygon points="12,0 8,8 16,8" fill="var(--ink)"/>
+                <text x="12" y="20" font-family="var(--mono)" font-size="11" fill="var(--ink)" text-anchor="middle">N</text>
+              </svg>
+            </div>
+            <div class="escala-grafica">
+              <div class="escala-linhas">
+                <span>0</span>
+                <span>1</span>
+                <span>2</span>
+                <span>5m</span>
+              </div>
+              <div class="barra-escala"></div>
+            </div>
+          </div>
+
+          <!-- Revisões -->
+          <div class="bloco-revisoes" data-bloco="revisoes">
+            <div class="tabela-revisoes">
+              <div class="rev-header">
+                <span>REV</span>
+                <span>DESCRIÇÃO</span>
+                <span>DATA</span>
+              </div>
+              <div class="rev-row">
+                <span>1</span>
+                <span>Técnico em Eletrotécnica, CEFET-MG</span>
+                <span></span>
+              </div>
+              <div class="rev-row">
+                <span>2</span>
+                <span>Projetos elétricos e BIM</span>
+                <span></span>
+              </div>
+              <div class="rev-row">
+                <span>3</span>
+                <span>Assistente de Projetos e Processos, Avista Logística</span>
+                <span>2026</span>
+              </div>
+              <div class="rev-row ativo">
+                <span>4</span>
+                <span>Engenharia de Software, PUC Minas (em andamento)</span>
+                <span>2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ficha -->
+          <div class="bloco-ficha" data-bloco="ficha">
+            <Ficha />
+          </div>
+
+          <!-- Carimbo -->
+          <div class="bloco-carimbo" data-bloco="carimbo">
+            <Carimbo folha="01/02" />
+          </div>
+        </div>
+      </div>
+      <div class="zona-faixa direita">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+      </div>
+      <div class="zona-faixa baixo">
+        <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLHA 02 -->
+  <section class="prancha" aria-label="Folha 02: Legenda e Tecnologias">
+    <div class="moldura-externa">
+      <div class="zona-faixa topo">
+        <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span>
+      </div>
+      <div class="zona-faixa esquerda">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+      </div>
+      <div class="moldura-interna">
+        <div class="grid-folha-02" data-bloco="folha-02">
+          <div class="bloco-legenda" data-bloco="legenda">
+            <div class="tabela-legenda">
+              <div class="legenda-header">LEGENDA DE SÍMBOLOS</div>
+              <div class="legenda-item">
+                <svg width="36" height="12"><line x1="0" y1="6" x2="36" y2="6" stroke="var(--ink)" stroke-width="3"/></svg>
+                <span>parede = projeto</span>
+              </div>
+              <div class="legenda-item">
+                <svg width="36" height="12"><path d="M0 12 A 12 12 0 0 1 12 0" fill="none" stroke="var(--ink)" stroke-width="0.75" stroke-dasharray="2 2"/><line x1="12" y1="0" x2="12" y2="12" stroke="var(--ink)" stroke-width="1"/></svg>
+                <span>porta = acesso ao detalhe</span>
+              </div>
+              <div class="legenda-item">
+                <svg width="36" height="12"><rect x="0" y="0" width="36" height="12" fill="url(#hachura-leg)" stroke="var(--accent)" stroke-width="0.5"/></svg>
+                <span>cômodo ativo = hachura vermelha</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bloco-tecnologias" data-bloco="tecnologias">
+            <div class="tabela-tecnologias">
+              <div class="tec-header">QUADRO DE TECNOLOGIAS</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>TECNOLOGIA</th>
+                    <th>CÔMODOS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="tec-tr" data-tec="Java">
+                    <td>Java</td>
+                    <td>C01, C04</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="Spring Boot">
+                    <td>Spring Boot</td>
+                    <td>C01</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="React">
+                    <td>React</td>
+                    <td>C01</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="MySQL">
+                    <td>MySQL</td>
+                    <td>C01</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="Node.js">
+                    <td>Node.js</td>
+                    <td>C02, C06</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="Playwright">
+                    <td>Playwright</td>
+                    <td>C02</td>
+                  </tr>
+                  <tr class="tec-tr" data-tec="Git">
+                    <td>Git</td>
+                    <td>C01</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bloco-carimbo-02" data-bloco="carimbo-02">
+            <Carimbo folha="02/02" />
+          </div>
+        </div>
+      </div>
+      <div class="zona-faixa direita">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+      </div>
+      <div class="zona-faixa baixo">
+        <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<svg style="display:none;">
+  <pattern id="hachura-leg" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="var(--accent)" stroke-width="1.5" opacity="0.12" />
+  </pattern>
+</svg>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Zilla+Slab:wght@700&display=swap');
+
+  :root {
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  body {
+    font-family: var(--mono);
+  }
+
+  .pranchas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 16px;
+    background-color: var(--paper);
+    min-height: 100dvh;
+  }
+
+  .prancha {
+    min-height: 100dvh;
+    display: flex;
+    position: relative;
+  }
+
+  /* Moldura externa e zonas */
+  .moldura-externa {
+    flex: 1;
+    border: 2px solid var(--ink);
+    position: relative;
+    display: grid;
+    grid-template-rows: 24px 1fr 24px;
+    grid-template-columns: 24px 1fr 24px;
+    background-color: var(--paper);
+  }
+
+  .zona-faixa {
+    display: flex;
+    color: var(--muted);
+    font-size: 11px;
+    font-family: var(--mono);
+    user-select: none;
+  }
+
+  .zona-faixa.topo {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.5px solid var(--ink);
+  }
+
+  .zona-faixa.baixo {
+    grid-column: 2;
+    grid-row: 3;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 0.5px solid var(--ink);
+  }
+
+  .zona-faixa.esquerda {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-right: 0.5px solid var(--ink);
+  }
+
+  .zona-faixa.direita {
+    grid-column: 3;
+    grid-row: 2;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-left: 0.5px solid var(--ink);
+  }
+
+  .moldura-interna {
+    grid-column: 2;
+    grid-row: 2;
+    border: 0.5px solid var(--ink);
+    margin: 24px;
+    position: relative;
+    background-image: 
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: calc(100% / 12) calc(100% / 8);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Grid da Folha 01 */
+  .grid-folha-01 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "hero hero hero hero hero hero hero norte-escala norte-escala norte-escala norte-escala norte-escala"
+      "planta planta planta planta planta planta planta revisoes revisoes revisoes revisoes revisoes"
+      "planta planta planta planta planta planta planta ficha ficha ficha ficha ficha"
+      "titulo-planta titulo-planta titulo-planta titulo-planta titulo-planta . . carimbo carimbo carimbo carimbo carimbo";
+    flex: 1;
+    padding: 20px;
+    gap: 16px;
+    position: relative;
+  }
+
+  .bloco-hero { grid-area: hero; }
+  .bloco-planta { grid-area: planta; }
+  .bloco-titulo-planta { grid-area: titulo-planta; align-self: end; }
+  .bloco-norte-escala { grid-area: norte-escala; justify-self: end; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .bloco-revisoes { grid-area: revisoes; }
+  .bloco-ficha { grid-area: ficha; align-self: start; }
+  .bloco-carimbo { grid-area: carimbo; align-self: end; justify-self: end; width: 100%; max-width: 380px; }
+
+  /* Grid da Folha 02 */
+  .grid-folha-02 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+    position: relative;
+  }
+
+  .bloco-legenda { grid-column: 1 / 6; grid-row: 1; }
+  .bloco-tecnologias { grid-column: 6 / 13; grid-row: 1; }
+  .bloco-carimbo-02 { grid-column: 9 / 13; grid-row: 2; align-self: end; justify-self: end; width: 100%; max-width: 380px; }
+
+  /* Hero */
+  .titulo-hero {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .linha-cota {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .chamada-vert {
+    width: 1px;
+    height: 8px;
+    background-color: var(--ink);
+  }
+
+  .eixo-cota {
+    flex: 1;
+    height: 1px;
+    background-color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 2px;
+  }
+
+  .texto-cota {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    background-color: var(--paper);
+    padding: 0 6px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* Título da Planta */
+  .bloco-titulo-planta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .circulo-titulo {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .num-titulo {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .nome-planta {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  /* Norte e Escala */
+  .norte {
+    display: flex;
+    justify-content: center;
+  }
+
+  .escala-grafica {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    gap: 2px;
+  }
+
+  .escala-linhas {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink);
+  }
+
+  .barra-escala {
+    height: 4px;
+    border: 1px solid var(--ink);
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ink),
+      var(--ink) 12px,
+      var(--paper) 12px,
+      var(--paper) 24px
+    );
+  }
+
+  /* Tabela de Revisões */
+  .tabela-revisoes {
+    width: 100%;
+    border: 1px solid var(--ink);
+    background-color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  .rev-header {
+    display: grid;
+    grid-template-columns: 32px 1fr 40px;
+    border-bottom: 0.5px solid var(--ink);
+    font-weight: 700;
+    background-color: var(--paper);
+    padding: 2px 4px;
+    text-align: left;
+  }
+
+  .rev-header span:first-child, .rev-header span:last-child {
+    text-align: center;
+  }
+
+  .rev-row {
+    display: grid;
+    grid-template-columns: 32px 1fr 40px;
+    border-bottom: 0.5px solid var(--grid);
+    padding: 2px 4px;
+    align-items: center;
+    color: var(--ink);
+  }
+
+  .rev-row:last-child {
+    border-bottom: none;
+  }
+
+  .rev-row span:first-child {
+    text-align: center;
+    border-right: 0.5px solid var(--grid);
+    padding-right: 2px;
+  }
+
+  .rev-row span:last-child {
+    text-align: center;
+    border-left: 0.5px solid var(--grid);
+    padding-left: 2px;
+  }
+
+  .rev-row.ativo {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Legenda de Símbolos */
+  .tabela-legenda {
+    border: 1px solid var(--ink);
+    background-color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+  }
+
+  .legenda-header {
+    font-weight: 700;
+    border-bottom: 0.5px solid var(--ink);
+    padding-bottom: 4px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .legenda-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--ink);
+  }
+
+  /* Quadro de Tecnologias */
+  .tabela-tecnologias {
+    border: 1px solid var(--ink);
+    background-color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .tec-header {
+    font-weight: 700;
+    border-bottom: 0.5px solid var(--ink);
+    padding-bottom: 4px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .tabela-tecnologias table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  .tabela-tecnologias th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--muted);
+    border-bottom: 0.5px solid var(--grid);
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+
+  .tabela-tecnologias td {
+    padding: 4px 6px;
+    border-bottom: 0.5px solid var(--grid);
+    color: var(--muted);
+  }
+
+  .tabela-tecnologias tr:last-child td {
+    border-bottom: none;
+  }
+
+  .tec-tr.destacado td {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 1024px) {
+    .grid-folha-01 {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-template-areas: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .grid-folha-02 {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bloco-carimbo, .bloco-carimbo-02 {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Observer para destacar linhas da tabela de tecnologias
+  const roomTechs: Record<string, string[]> = {
+    c01: ['Java', 'Spring Boot', 'React', 'MySQL', 'Git'],
+    c02: ['Node.js', 'Playwright'],
+    c03: [],
+    c04: ['Java'],
+    c05: [],
+    c06: ['Node.js']
+  };
+
+  const observer = new MutationObserver(() => {
+    const ativoSala = document.querySelector('.sala-interativa.ativo');
+    const roomId = ativoSala ? ativoSala.getAttribute('data-room') : null;
+    const techsAtivas = roomId ? (roomTechs[roomId] || []) : [];
+
+    document.querySelectorAll('.tec-tr').forEach(tr => {
+      const tecName = tr.getAttribute('data-tec');
+      if (roomId && techsAtivas.includes(tecName)) {
+        tr.classList.add('destacado');
+      } else {
+        tr.classList.remove('destacado');
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.sala-interativa').forEach(sala => {
+      observer.observe(sala, { attributes: true, attributeFilter: ['class'] });
+    });
+  });
+
+  // Cursor personalizado
+  const cursor = document.getElementById('cursor');
+  if (cursor && window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX - 12}px`;
+      cursor.style.top = `${e.clientY - 12}px`;
+
+      const target = e.target as HTMLElement;
+      const isInteractive = target.closest('.sala-interativa') || target.closest('a');
+      cursor.querySelectorAll('line').forEach(l => {
+        l.setAttribute('stroke', isInteractive ? 'var(--accent)' : 'var(--ink)');
+      });
+    });
+  } else if (cursor) {
+    cursor.style.display = 'none';
+  }
+</script>

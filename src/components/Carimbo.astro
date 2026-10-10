@@ -1,0 +1,59 @@
+---
+---
+<div class="carimbo" id="carimbo">
+  <div class="info">
+    <span class="desktop">PROJETO "PORTFÓLIO PESSOAL" · </span>
+    PÁGINA <span id="pag-num">01</span> / 03
+    <span class="desktop"> · <span id="pag-secao">CAPA</span></span>
+  </div>
+  <nav class="nav-botoes" aria-label="Navegação entre páginas">
+    <button data-hash="#capa" aria-current="page">01</button>
+    <button data-hash="#cuphub">02</button>
+    <button data-hash="#automacao">03</button>
+  </nav>
+</div>
+
+<script>
+  const updateActive = (hash) => {
+    document.querySelectorAll('.nav-botoes button').forEach(btn => {
+      btn.setAttribute('aria-current', btn.dataset.hash === hash ? 'page' : 'false');
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const pag = entry.target;
+        document.getElementById('pag-num').textContent = 
+          pag.id === 'capa' ? '01' : pag.id === 'cuphub' ? '02' : '03';
+        document.getElementById('pag-secao').textContent = pag.dataset.titulo;
+        const hash = '#' + pag.id;
+        history.replaceState(null, null, hash);
+        updateActive(hash);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('.pagina').forEach(p => observer.observe(p));
+  document.querySelectorAll('.nav-botoes button[data-hash]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelector(btn.dataset.hash).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+<style>
+  .carimbo {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--paper); border: 1px solid var(--ink);
+    padding: 12px; z-index: 1000;
+    font-size: 11px; display: flex; gap: 16px; align-items: center;
+  }
+  .nav-botoes { display: flex; gap: 4px; }
+  button { padding: 8px 12px; border: 1px solid var(--ink); background: var(--paper); cursor: pointer; min-width: 44px; min-height: 44px; }
+  button[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  @media (max-width: 900px) {
+    .desktop { display: none; }
+    .carimbo { bottom: 0; right: 0; width: 100%; justify-content: space-between; border-left: none; border-right: none; border-bottom: none; }
+  }
+</style>

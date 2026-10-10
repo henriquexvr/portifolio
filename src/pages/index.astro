@@ -1,0 +1,130 @@
+---
+import '../styles/global.css';
+import BotaoTema from '../components/BotaoTema.astro';
+import Carimbo from '../components/Carimbo.astro';
+import { curriculo } from '../data/curriculo.ts';
+import { projetos } from '../data/projetos.ts';
+import PaginaProjeto from '../components/PaginaProjeto.astro';
+import CupHubDiag from '../components/diagramas/CupHub.astro';
+import BotDiag from '../components/diagramas/Bot.astro';
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={curriculo.resumo} />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (function() {
+        const tema = localStorage.getItem('tema') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro');
+        document.documentElement.setAttribute('data-tema', tema);
+      })();
+    </script>
+    <title>Henrique Xavier | Engenharia de Software</title>
+  </head>
+  <body>
+    <BotaoTema />
+    <Carimbo />
+    
+    <main>
+      <section class="pagina" id="capa" aria-labelledby="h-capa" data-titulo="CAPA">
+        <h1 id="h-capa" class="sr-only">CAPA</h1>
+        <div class="moldura-interna">
+          <div class="grid-capa">
+            <aside class="col-esq">
+              <h1>{curriculo.nome.split(' ').map(n => <div>{n}</div>)}</h1>
+              <p class="cota"><span>←</span> {curriculo.cota} <span>→</span></p>
+              <p class="tag">{curriculo.tag}</p>
+              
+              <div class="bloco-contato">
+                <h2>00 RESUMO</h2>
+                <p>{curriculo.resumo}</p>
+                
+                <h2>CONTATO</h2>
+                <ul class="lista-contato">
+                  <li><a href={`mailto:${curriculo.contato.email}`}>{curriculo.contato.email} ↗</a></li>
+                  <li><a href={`https://${curriculo.contato.github}`}>{curriculo.contato.github} ↗</a></li>
+                  <li><a href={`https://${curriculo.contato.linkedin}`}>{curriculo.contato.linkedin} ↗</a></li>
+                  <li>{curriculo.contato.local}</li>
+                </ul>
+              </div>
+            </aside>
+            
+            <main class="col-dir">
+              <div class="bloco-item">
+                <h2>01 HABILIDADES</h2>
+                <dl>
+                  {curriculo.habilidades.map(h => (
+                    <div class="linha-hab">
+                      <dt>{h.label}</dt>
+                      <dd>{h.itens}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <div class="bloco-item">
+                <h2>02 PROJETOS</h2>
+                {curriculo.projetos.map(p => (
+                  <a href={`#${p.id}`} class="projeto-link" onclick="document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'})">
+                    <span>{p.num}</span>
+                    <strong>{p.nome}</strong>
+                    <span>{p.ano}</span>
+                    <span>{p.stack}</span>
+                    <span>→</span>
+                  </a>
+                ))}
+              </div>
+
+              <div class="bloco-item">
+                <h2>03 FORMAÇÃO</h2>
+                {curriculo.formacao.map(f => (
+                  <div><strong>{f.curso}</strong><br/><span style="color:var(--muted)">{f.periodo}</span></div>
+                ))}
+              </div>
+
+              <div class="bloco-item">
+                <h2>04 EXPERIÊNCIA</h2>
+                {curriculo.experiencia.map(e => (
+                  <div><strong>{e.empresa} · {e.cargo}</strong><br/><span style="color:var(--muted)">{e.periodo}</span><br/>{e.descricao}</div>
+                ))}
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <PaginaProjeto projeto={projetos[0]} proximo={projetos[1]} idx={0}>
+        <CupHubDiag slot="diagrama" />
+      </PaginaProjeto>
+      <PaginaProjeto projeto={projetos[1]} idx={1}>
+        <BotDiag slot="diagrama" />
+      </PaginaProjeto>
+    </main>
+
+    <style>
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+      .pagina { min-height: 100dvh; scroll-snap-align: start; padding: 40px; position: relative; }
+      @media (min-width: 900px) { .pagina { height: 100dvh; scroll-snap-type: y mandatory; overflow: hidden; } }
+      .moldura-interna { width: 100%; height: 100%; border: 0.5px solid var(--ink); padding: 24px; display: grid; }
+      .grid-capa { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; width: 100%; }
+      .col-esq { grid-column: 1 / 6; display: flex; flex-direction: column; gap: 16px; }
+      .col-dir { grid-column: 6 / 13; display: flex; flex-direction: column; gap: 24px; }
+      h1 { font-family: 'Zilla Slab', serif; font-size: clamp(2.8rem, 6vh, 5.5rem); line-height: 1; color: var(--ink); }
+      h2 { font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--ink); padding-bottom: 4px; margin-bottom: 8px; }
+      .cota { font-size: 12px; font-weight: 700; color: var(--ink); }
+      .tag { color: var(--accent); }
+      .lista-contato { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+      .lista-contato a { text-decoration: none; border-bottom: 1px solid var(--ink); }
+      .linha-hab { display: grid; grid-template-columns: 120px 1fr; gap: 8px; margin-bottom: 4px; }
+      .projeto-link { display: grid; grid-template-columns: 30px 1fr 50px 1fr 30px; align-items: center; text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--ink); }
+      .projeto-link:hover { color: var(--accent); }
+      .bloco-item { display: flex; flex-direction: column; gap: 8px; }
+      @media (max-width: 900px) {
+        .col-esq, .col-dir { grid-column: 1 / 13; }
+        .pagina { padding: 16px; }
+      }
+    </style>
+  </body>
+</html>

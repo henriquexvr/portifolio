@@ -1,0 +1,335 @@
+---
+---
+<div class="planta-container">
+  <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid meet" class="svg-planta">
+    <defs>
+      <pattern id="hachura" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="var(--accent)" stroke-width="1.5" opacity="0.12" />
+      </pattern>
+    </defs>
+
+    <style>
+      text { font-family: var(--mono); }
+      .parede-ext { fill: none; stroke: var(--ink); stroke-width: 6px; stroke-linejoin: miter; transition: stroke 0.15s; }
+      .parede-int { fill: none; stroke: var(--ink); stroke-width: 3px; stroke-linejoin: miter; transition: stroke 0.15s; }
+      .linha-finissima { fill: none; stroke: var(--ink); stroke-width: 0.75px; stroke-dasharray: 4 2; stroke-opacity: 0.8; }
+      .porta-folha { fill: none; stroke: var(--ink); stroke-width: 1px; transition: transform 0.3s ease; }
+      .janela-linha { stroke: var(--ink); stroke-width: 1.5px; }
+      .cota-linha { fill: none; stroke: var(--ink); stroke-width: 1px; }
+      .cota-texto { font-size: 11px; fill: var(--ink); text-anchor: middle; font-family: var(--mono); }
+      
+      .sala-interativa { cursor: crosshair; }
+      .sala-interativa:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      .sala-interativa:hover .parede-ext,
+      .sala-interativa:hover .parede-int {
+        stroke: var(--accent);
+        stroke-opacity: 0.6;
+      }
+
+      .comodo-fundo {
+        fill: transparent;
+        transition: fill 0.4s ease;
+      }
+
+      .sala-interativa.ativo .comodo-fundo {
+        fill: url(#hachura);
+      }
+
+      .sala-interativa.ativo .parede-ext,
+      .sala-interativa.ativo .parede-int {
+        stroke: var(--accent);
+      }
+
+      .sala-interativa.ativo .rotulo-comodo,
+      .sala-interativa.ativo .nome-comodo {
+        fill: var(--accent);
+      }
+
+      .porta-grupo { transition: transform 0.3s ease; }
+      #c01.ativo .porta-grupo { transform-origin: 315px 280px; transform: rotate(-70deg); }
+      #c02.ativo .porta-grupo { transform-origin: 580px 280px; transform: rotate(-70deg); }
+      #c03.ativo .porta-grupo { transform-origin: 845px 280px; transform: rotate(-70deg); }
+      #c04.ativo .porta-grupo { transform-origin: 315px 360px; transform: rotate(70deg); }
+      #c05.ativo .porta-grupo { transform-origin: 580px 360px; transform: rotate(70deg); }
+      #c06.ativo .porta-grupo { transform-origin: 845px 360px; transform: rotate(70deg); }
+    </style>
+
+    <!-- COTAS EXTERNAS -->
+    <line x1="200" y1="50" x2="1000" y2="50" class="cota-linha" />
+    <line x1="200" y1="45" x2="200" y2="55" class="cota-linha" />
+    <line x1="466" y1="45" x2="466" y2="55" class="cota-linha" />
+    <line x1="733" y1="45" x2="733" y2="55" class="cota-linha" />
+    <line x1="1000" y1="45" x2="1000" y2="55" class="cota-linha" />
+    <text x="333" y="42" class="cota-texto">A</text>
+    <text x="600" y="42" class="cota-texto">B</text>
+    <text x="866" y="42" class="cota-texto">C</text>
+
+    <line x1="150" y1="80" x2="150" y2="560" class="cota-linha" />
+    <line x1="145" y1="80" x2="155" y2="80" class="cota-linha" />
+    <line x1="145" y1="320" x2="155" y2="320" class="cota-linha" />
+    <line x1="145" y1="560" x2="155" y2="560" class="cota-linha" />
+    <text x="135" y="205" class="cota-texto" transform="rotate(-90, 135, 205)">A</text>
+    <text x="135" y="445" class="cota-texto" transform="rotate(-90, 135, 445)">B</text>
+
+    <!-- PAREDES -->
+    <rect x="200" y="80" width="800" height="480" class="parede-ext" />
+
+    <line x1="200" y1="280" x2="1000" y2="280" class="parede-int" />
+    <line x1="200" y1="360" x2="1000" y2="360" class="parede-int" />
+
+    <line x1="466" y1="80" x2="466" y2="280" class="parede-int" />
+    <line x1="733" y1="80" x2="733" y2="280" class="parede-int" />
+
+    <line x1="466" y1="360" x2="466" y2="560" class="parede-int" />
+    <line x1="733" y1="360" x2="733" y2="560" class="parede-int" />
+
+    <!-- HALL (largura >= 90 unidades) -->
+    <rect x="110" y="280" width="90" height="80" fill="var(--paper)" />
+    <line x1="110" y1="280" x2="110" y2="360" class="parede-ext" />
+    <line x1="110" y1="300" x2="110" y2="340" stroke="var(--paper)" stroke-width="7" />
+    <text x="155" y="325" font-size="11" fill="var(--muted)" text-anchor="middle" font-family="var(--mono)">ENTRADA</text>
+    <path d="M 115 320 L 145 320 M 135 313 L 145 320 L 135 327" fill="none" stroke="var(--ink)" stroke-width="1" />
+
+    <!-- JANELAS -->
+    <!-- C01 -->
+    <line x1="260" y1="80" x2="340" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="260" y1="77" x2="340" y2="77" class="janela-linha" />
+    <line x1="260" y1="83" x2="340" y2="83" class="janela-linha" />
+    <line x1="360" y1="80" x2="440" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="360" y1="77" x2="440" y2="77" class="janela-linha" />
+    <line x1="360" y1="83" x2="440" y2="83" class="janela-linha" />
+
+    <!-- C02 -->
+    <line x1="530" y1="80" x2="610" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="530" y1="77" x2="610" y2="77" class="janela-linha" />
+    <line x1="530" y1="83" x2="610" y2="83" class="janela-linha" />
+    <line x1="630" y1="80" x2="710" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="630" y1="77" x2="710" y2="77" class="janela-linha" />
+    <line x1="630" y1="83" x2="710" y2="83" class="janela-linha" />
+
+    <!-- C03 -->
+    <line x1="790" y1="80" x2="870" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="790" y1="77" x2="870" y2="77" class="janela-linha" />
+    <line x1="790" y1="83" x2="870" y2="83" class="janela-linha" />
+    <line x1="890" y1="80" x2="970" y2="80" stroke="var(--paper)" stroke-width="6" />
+    <line x1="890" y1="77" x2="970" y2="77" class="janela-linha" />
+    <line x1="890" y1="83" x2="970" y2="83" class="janela-linha" />
+
+    <!-- C04 -->
+    <line x1="260" y1="560" x2="340" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="260" y1="557" x2="340" y2="557" class="janela-linha" />
+    <line x1="260" y1="563" x2="340" y2="563" class="janela-linha" />
+    <line x1="360" y1="560" x2="440" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="360" y1="557" x2="440" y2="557" class="janela-linha" />
+    <line x1="360" y1="563" x2="440" y2="563" class="janela-linha" />
+
+    <!-- C05 -->
+    <line x1="530" y1="560" x2="610" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="530" y1="557" x2="610" y2="557" class="janela-linha" />
+    <line x1="530" y1="563" x2="610" y2="563" class="janela-linha" />
+    <line x1="630" y1="560" x2="710" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="630" y1="557" x2="710" y2="557" class="janela-linha" />
+    <line x1="630" y1="563" x2="710" y2="563" class="janela-linha" />
+
+    <!-- C06 -->
+    <line x1="790" y1="560" x2="870" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="790" y1="557" x2="870" y2="557" class="janela-linha" />
+    <line x1="790" y1="563" x2="870" y2="563" class="janela-linha" />
+    <line x1="890" y1="560" x2="970" y2="560" stroke="var(--paper)" stroke-width="6" />
+    <line x1="890" y1="557" x2="970" y2="557" class="janela-linha" />
+    <line x1="890" y1="563" x2="970" y2="563" class="janela-linha" />
+
+    <!-- CORREDOR -->
+    <text x="600" y="324" font-size="12" fill="var(--muted)" text-anchor="middle" letter-spacing="2px" font-family="var(--mono)">CORREDOR</text>
+
+    <!-- CÔMODOS (Apenas Código 12px e Nome 16px) -->
+    <!-- C01 -->
+    <g id="c01" data-room="c01" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C01 CupHub">
+      <rect x="203" y="83" width="260" height="194" class="comodo-fundo" />
+      <text x="220" y="110" class="rotulo-comodo" font-size="12">C01</text>
+      <text x="333" y="180" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">CUPHUB</text>
+      <g class="porta-grupo">
+        <line x1="315" y1="280" x2="355" y2="280" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 315 280 A 40 40 0 0 1 355 240" class="linha-finissima" />
+        <line x1="315" y1="280" x2="315" y2="240" class="porta-folha" />
+      </g>
+    </g>
+
+    <!-- C02 -->
+    <g id="c02" data-room="c02" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C02 Bot EmiteAí">
+      <rect x="469" y="83" width="261" height="194" class="comodo-fundo" />
+      <text x="486" y="110" class="rotulo-comodo" font-size="12">C02</text>
+      <text x="599" y="180" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">BOT EMITEAÍ</text>
+      <g class="porta-grupo">
+        <line x1="580" y1="280" x2="620" y2="280" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 580 280 A 40 40 0 0 1 620 240" class="linha-finissima" />
+        <line x1="580" y1="280" x2="580" y2="240" class="porta-folha" />
+      </g>
+    </g>
+
+    <!-- C03 -->
+    <g id="c03" data-room="c03" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C03 Memória Virtual">
+      <rect x="736" y="83" width="261" height="194" class="comodo-fundo" />
+      <text x="753" y="110" class="rotulo-comodo" font-size="12">C03</text>
+      <text x="866" y="180" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">MEMÓRIA VIRTUAL</text>
+      <g class="porta-grupo">
+        <line x1="845" y1="280" x2="885" y2="280" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 845 280 A 40 40 0 0 1 885 240" class="linha-finissima" />
+        <line x1="845" y1="280" x2="845" y2="240" class="porta-folha" />
+      </g>
+    </g>
+
+    <!-- C04 -->
+    <g id="c04" data-room="c04" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C04 Escalonamento de CPU">
+      <rect x="203" y="363" width="260" height="194" class="comodo-fundo" />
+      <text x="220" y="390" class="rotulo-comodo" font-size="12">C04</text>
+      <text x="333" y="460" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">ESCALONAMENTO CPU</text>
+      <g class="porta-grupo">
+        <line x1="315" y1="360" x2="355" y2="360" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 315 360 A 40 40 0 0 0 355 400" class="linha-finissima" />
+        <line x1="315" y1="360" x2="315" y2="400" class="porta-folha" />
+      </g>
+    </g>
+
+    <!-- C05 -->
+    <g id="c05" data-room="c05" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C05 Compasso">
+      <rect x="469" y="363" width="261" height="194" class="comodo-fundo" />
+      <text x="486" y="390" class="rotulo-comodo" font-size="12">C05</text>
+      <text x="599" y="460" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">COMPASSO</text>
+      <g class="porta-grupo">
+        <line x1="580" y1="360" x2="620" y2="360" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 580 360 A 40 40 0 0 0 620 400" class="linha-finissima" />
+        <line x1="580" y1="360" x2="580" y2="400" class="porta-folha" />
+      </g>
+    </g>
+
+    <!-- C06 -->
+    <g id="c06" data-room="c06" class="sala-interativa" tabindex="0" role="button" aria-label="Abrir C06 WebTech Network">
+      <rect x="736" y="363" width="261" height="194" class="comodo-fundo" />
+      <text x="753" y="390" class="rotulo-comodo" font-size="12">C06</text>
+      <text x="866" y="460" class="nome-comodo" text-anchor="middle" font-size="16" font-weight="700">WEBTECH NETWORK</text>
+      <g class="porta-grupo">
+        <line x1="845" y1="360" x2="885" y2="360" stroke="var(--paper)" stroke-width="4" />
+        <path d="M 845 360 A 40 40 0 0 0 885 400" class="linha-finissima" />
+        <line x1="845" y1="360" x2="845" y2="400" class="porta-folha" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .planta-container {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .svg-planta {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+
+<script>
+  function ativarSala(id: string) {
+    const salas = document.querySelectorAll('.sala-interativa');
+    const fichas = document.querySelectorAll('.ficha-conteudo');
+    const fichaVazia = document.getElementById('ficha-vazia');
+
+    salas.forEach(s => {
+      if (s.getAttribute('data-room') === id) {
+        const jaAtivo = s.classList.contains('ativo');
+        if (jaAtivo) {
+          s.classList.remove('ativo');
+          history.pushState(null, '', window.location.pathname);
+          if (fichaVazia) fichaVazia.hidden = false;
+          fichas.forEach(f => {
+            f.classList.remove('ativo');
+            f.hidden = true;
+          });
+        } else {
+          s.classList.add('ativo');
+          history.pushState(null, '', `#${id}`);
+          if (fichaVazia) fichaVazia.hidden = true;
+          fichas.forEach(f => {
+            if (f.getAttribute('data-ficha-id') === id) {
+              f.classList.add('ativo');
+              f.hidden = false;
+            } else {
+              f.classList.remove('ativo');
+              f.hidden = true;
+            }
+          });
+        }
+      } else {
+        s.classList.remove('ativo');
+      }
+    });
+
+    // Update mobile buttons active state
+    document.querySelectorAll('.planta-mobile-btn').forEach(btn => {
+      if (btn.getAttribute('data-room') === id) {
+        btn.classList.add('ativo');
+      } else {
+        btn.classList.remove('ativo');
+      }
+    });
+
+    // Se nenhuma sala ficou ativa
+    const algumaAtiva = document.querySelector('.sala-interativa.ativo');
+    if (!algumaAtiva) {
+      if (fichaVazia) fichaVazia.hidden = false;
+      fichas.forEach(f => {
+        f.classList.remove('ativo');
+        f.hidden = true;
+      });
+      history.pushState(null, '', window.location.pathname);
+    }
+  }
+
+  function checarHashInicial() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const sala = document.querySelector(`[data-room="${hash}"]`);
+      if (sala) {
+        ativarSala(hash);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const salas = document.querySelectorAll('.sala-interativa');
+    
+    salas.forEach(sala => {
+      const roomId = sala.getAttribute('data-room');
+      
+      sala.addEventListener('click', () => {
+        if (roomId) ativarSala(roomId);
+      });
+
+      sala.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (roomId) ativarSala(roomId);
+        }
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        salas.forEach(s => s.classList.remove('ativo'));
+        const fichaVazia = document.getElementById('ficha-vazia');
+        if (fichaVazia) fichaVazia.hidden = false;
+        document.querySelectorAll('.ficha-conteudo').forEach(f => {
+          f.classList.remove('ativo');
+          f.hidden = true;
+        });
+        history.pushState(null, '', window.location.pathname);
+      }
+    });
+
+    checarHashInicial();
+  });
+</script>
