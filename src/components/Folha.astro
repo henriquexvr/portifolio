@@ -3,24 +3,24 @@ const { titulo, id, dataBloco = "" } = Astro.props;
 ---
 <section class="pagina" id={id} data-titulo={titulo}>
   <div class="moldura-externa">
+    <div class="zonas-topo">
+      {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
+    </div>
+    <div class="zonas-esq">
+      {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
+    </div>
     <div class="moldura-interna" data-bloco={dataBloco}>
-      <div class="zonas-topo">
-        {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
-      </div>
-      <div class="zonas-esq">
-        {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
-      </div>
       
       <div class="conteudo-slot">
         <slot />
       </div>
 
-      <div class="zonas-dir">
-        {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
-      </div>
-      <div class="zonas-base">
-        {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
-      </div>
+    </div>
+    <div class="zonas-dir">
+      {['1', '2', '3', '4'].map(n => <div class="zona-num">{n}</div>)}
+    </div>
+    <div class="zonas-base">
+      {['A', 'B', 'C', 'D', 'E', 'F'].map(l => <div class="zona-letra">{l}</div>)}
     </div>
   </div>
 </section>
@@ -29,33 +29,31 @@ const { titulo, id, dataBloco = "" } = Astro.props;
   .pagina { 
     height: 100dvh; 
     scroll-snap-align: start; 
-    padding: 16px; 
+    padding: var(--margem-externa); 
     position: relative; 
     box-sizing: border-box;
   }
   .moldura-externa { 
     width: 100%; height: 100%; 
     border: 2px solid var(--ink); 
-    padding: 16px; 
     position: relative; 
     display: grid;
-    grid-template-columns: 24px 1fr 24px;
-    grid-template-rows: 24px 1fr 24px;
+    grid-template-columns: var(--recuo-interno) 1fr var(--recuo-interno);
+    grid-template-rows: var(--recuo-interno) 1fr var(--recuo-interno);
   }
   .moldura-interna { 
     grid-column: 2; grid-row: 2;
-    border: 0.5px solid var(--ink); 
+    border: var(--borda-interna) solid var(--ink); 
     position: relative;
-    display: grid;
-    grid-template-columns: 24px 1fr 24px;
-    grid-template-rows: 24px 1fr 24px;
+    display: flex;
+    flex-direction: column;
   }
   .conteudo-slot {
-    grid-column: 2; grid-row: 2;
     position: relative;
     z-index: 1;
     height: 100%;
     overflow: hidden;
+    padding: 16px;
   }
   /* Malha */
   .moldura-interna::before {

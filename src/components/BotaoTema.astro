@@ -1,32 +1,42 @@
 ---
 ---
-<div id="btn-tema" class="btn" role="switch" aria-checked="false" aria-label="Alternar tema entre papel e blueprint" title="Alternar para blueprint" data-bloco="tema">
+<button type="button" id="btn-tema" role="switch" aria-checked="false" aria-label="Alternar tema entre papel e blueprint" title="Alternar para blueprint" data-bloco="tema">
   <span class="label-papel">PAPEL</span>
-  <span class="separador">/</span>
+  <span class="bolinha" aria-hidden="true"></span>
   <span class="label-blueprint">BLUEPRINT</span>
-</div>
+</button>
 
 <style>
   #btn-tema {
     position: fixed;
-    top: calc(var(--recuo-moldura) + 12px);
-    right: calc(var(--recuo-moldura) + 12px);
+    top: calc(var(--recuo-moldura) + var(--folga) + 3px);
+    right: calc(var(--recuo-moldura) + var(--folga) + 3px);
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 10px;
+    padding: 4px;
     z-index: 1000;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    box-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer;
   }
+  #btn-tema:active { transform: translate(2px, 2px); box-shadow: none; }
+  #btn-tema:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  
+  .bolinha { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); }
+  
+  .label-papel, .label-blueprint { padding: 2px 4px; border: 1px solid transparent; }
+  
   #btn-tema[aria-checked="false"] .label-papel { background: var(--ink); color: var(--paper); }
-  #btn-tema[aria-checked="false"] .label-blueprint { background: transparent; color: var(--ink); }
-  #btn-tema[aria-checked="true"] .label-papel { background: transparent; color: var(--ink); }
   #btn-tema[aria-checked="true"] .label-blueprint { background: var(--ink); color: var(--paper); }
-  .separador { color: var(--muted); font-size: 11px; }
-  @media (max-width: 900px) {
-    #btn-tema { top: 12px; right: 12px; min-width: 44px; min-height: 44px; justify-content: center; }
-    .label-papel, .label-blueprint, .separador { display: none; }
-    #btn-tema::before { content: "☀"; }
-    #btn-tema[aria-checked="true"]::before { content: "☾"; }
+
+  @media (hover: hover) {
+    #btn-tema:hover { transform: translateY(1px); }
+    #btn-tema[aria-checked="false"]:hover .label-blueprint { background: var(--ink); color: var(--paper); }
+    #btn-tema[aria-checked="true"]:hover .label-papel { background: var(--ink); color: var(--paper); }
   }
 </style>
 

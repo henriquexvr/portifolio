@@ -43,6 +43,20 @@
   }, { threshold: 0.6 });
 
   document.querySelectorAll('.pagina').forEach(p => observer.observe(p));
+
+  // ResizeObserver para altura real do carimbo
+  const carimboEl = document.getElementById('carimbo');
+  if (carimboEl) {
+    const ro = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const h = entry.contentRect.height;
+        document.querySelectorAll('.proj-layout').forEach(pl => {
+          pl.style.setProperty('--carimbo-h', h + 'px');
+        });
+      }
+    });
+    ro.observe(carimboEl);
+  }
   document.querySelectorAll('.nav-botoes button[data-hash]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       document.querySelector(btn.dataset.hash).scrollIntoView({ behavior: 'smooth' });
@@ -55,8 +69,8 @@
 <style>
   .carimbo {
     position: fixed;
-    bottom: calc(var(--recuo-moldura) + 12px);
-    right: calc(var(--recuo-moldura) + 12px);
+    bottom: calc(var(--recuo-moldura) + var(--folga) + 4px);
+    right: calc(var(--recuo-moldura) + var(--folga) + 4px);
     width: 340px;
     background: var(--paper);
     border: 1px solid var(--ink);
